@@ -46,8 +46,6 @@ code/
 ├── 8_reflectance_HSI_greenland.py      # Reflectance statistics by surface type for the Greenland scenes
 ├── 9_reflectance_RSR.py                # Reflectance statistics by surface type on the RSR-convolved products
 ├── 9b_reflectance_band.py              # Per-band reflectance statistics by surface type
-├── 04_broadband_albedo_20240505.ipynb  # Broadband albedo from Resonon hyperspectral hypercubes
-├── 05_gee_landsat_sentinel_download_v1_20240907.ipynb  # Download Landsat 8 and Sentinel-2 imagery through Google Earth Engine
 ├── classification_v2.ipynb             # CNN training and classification
 └── workflow_reflectance_generic.ipynb  # Workflow that runs scripts 1 to 9 for each study site
 ```
