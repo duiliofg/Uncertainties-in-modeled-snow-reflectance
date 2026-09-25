@@ -11,9 +11,6 @@ Description:
 Reads the per-cell reflectance difference tables (Sec3.2_*.csv) and aggregates them by
 band, simulation type (RSR, AVG) and pixel type into the summary tables
 Final_Reflectance_Summary_with_Correct_Error_Propagation_<site>.csv.
-Inputs stored in percent are converted to fraction, and inputs with the difference
-defined as hyperspectral minus Landsat are converted to Landsat minus hyperspectral,
-so that all summary tables share the same format.
 
 Requirements:
 - Python 3.x
@@ -24,7 +21,6 @@ import os
 import numpy as np
 import pandas as pd
 
-# === CONFIGURATION ===
 input_folder = "."
 output_folder = "."
 
@@ -66,8 +62,9 @@ def summarize_reflectance_differences(df, class_column="pixel_type"):
     computed for the hyperspectral reflectance, the Landsat reflectance and the
     difference. The hyperspectral uncertainty and the reflectance error are aggregated
     as the square root of the mean of their squares, the Landsat dispersion as the
-    population standard deviation, and the uncertainty of the difference as the square
-    root of the sum of the squared hyperspectral uncertainty and reflectance error.
+    population standard deviation, and the uncertainty of the difference (Landsat minus
+    hyperspectral) is propagated in quadrature from the two terms of the subtraction,
+    sqrt(error_propagation_std_hyper**2 + std_landsat**2).
 
     Parameters:
     - df: pandas.DataFrame, per-cell table with the columns 'band', 'simulation_type',
@@ -82,6 +79,7 @@ def summarize_reflectance_differences(df, class_column="pixel_type"):
     for (band, sim_type, pixel_type), g in df.groupby(["band", "simulation_type", "pixel_type"]):
         std_hyper = np.sqrt(np.mean(g["std_hyper"] ** 2))
         refl_error = np.sqrt(np.mean(g["reflectance_error"] ** 2))
+        std_landsat = g["landsat_value"].std(ddof=0)
         rows.append({
             "band": band,
             "simulation_type": sim_type,
@@ -91,8 +89,8 @@ def summarize_reflectance_differences(df, class_column="pixel_type"):
             "mean_difference": g["difference"].mean(),
             "reflectance_error_mean": refl_error,
             "mean_landsat": g["landsat_value"].mean(),
-            "std_landsat": g["landsat_value"].std(ddof=0),
-            "error_propagation_difference": np.sqrt(std_hyper ** 2 + refl_error ** 2),
+            "std_landsat": std_landsat,
+            "error_propagation_difference": np.sqrt(std_hyper ** 2 + std_landsat ** 2),
         })
     return pd.DataFrame(rows)
 
