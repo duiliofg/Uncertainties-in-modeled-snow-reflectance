@@ -41,12 +41,9 @@ code/
 ├── 5c_comparte_plot_IRL_paper.py       # Publication version of the Pika IR-L comparison figure
 ├── 6_training_CNN.py                   # Train the CNN model from polygons across multiple hypercubes
 ├── 7_run_CNN_all_hsi.py                # Apply the trained CNN to every hypercube
-├── 7_run_CNN_all_hsi_greenland.py      # Apply the trained CNN to the Greenland hypercubes
 ├── 8_reflectance_HSI.py                # Reflectance statistics by surface type over the full spectral range
-├── 8_reflectance_HSI_greenland.py      # Reflectance statistics by surface type for the Greenland scenes
 ├── 9_reflectance_RSR.py                # Reflectance statistics by surface type on the RSR-convolved products
 ├── 9b_reflectance_band.py              # Per-band reflectance statistics by surface type
-├── classification_v2.ipynb             # CNN training and classification
 └── workflow_reflectance_generic.ipynb  # Workflow that runs scripts 1 to 9 for each study site
 ```
 
