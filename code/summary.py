@@ -33,9 +33,12 @@ SITES = {
         "files": ["Sec3.2_CARC_PIKAIRL_reflectance_difference_LANDSAT8.csv"],
         "class_column": "pixel_type",
     },
-    "ONION": {
-        "files": ["Sec3.2_Onion_PIKAL_reflectance_difference_LANDSAT8.csv",
-                  "Sec3.2_Onion_PIKAIRL_reflectance_difference_LANDSAT8.csv"],
+    "ONION_PIKAL": {
+        "files": ["Sec3.2_Onion_PIKAL_reflectance_difference_LANDSAT8.csv"],
+        "class_column": "class",
+    },
+    "ONION_PIKAIRL": {
+        "files": ["Sec3.2_Onion_PIKAIRL_reflectance_difference_LANDSAT8.csv"],
         "class_column": "class",
     },
     "Sodankyla": {
