@@ -1,5 +1,7 @@
 # Assessing spaceborne snow reflectance uncertainties using UAV hyperspectral measurements
 
+https://doi.org/10.5281/zenodo.23025601
+
 This repository contains the code associated with the manuscript:
 
 **"Assessing spaceborne snow reflectance uncertainties using UAV hyperspectral measurements"**  
